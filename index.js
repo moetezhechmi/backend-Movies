@@ -5,6 +5,8 @@ const path = require('path');
 
 const app = express();
 const PORT = 8889;
+require('dotenv').config();
+
 
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
@@ -12,12 +14,12 @@ app.use('/uploads', express.static('uploads'));
 // ----------------------
 // 1️⃣ Connexion MongoDB
 // ----------------------
-mongoose.connect('mongodb+srv://grounmoetezhechmi_db_user:LB6hA4pw3X7S4YnQ@football-academy-cluste.eqr02mk.mongodb.net/?retryWrites=true&w=majority&appName=football-academy-cluster', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => console.log('✅ Connecté à MongoDB'))
-.catch((err) => console.error('❌ Erreur MongoDB :', err));
+  .then(() => console.log('✅ Connecté à MongoDB'))
+  .catch((err) => console.error('❌ Erreur MongoDB :', err));
 
 // ----------------------
 // 2️⃣ Définition des modèles
